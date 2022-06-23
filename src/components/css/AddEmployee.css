@@ -8,14 +8,14 @@ input{
 }
 
 h1{
-    background-color: aqua;
+    background-color: darkgrey;
     width: 700px;
 }
 
 .btn{
-    background-color: aquamarine;
+    background-color:greenyellow;
     height: 30px;
     width: 300px;
-    border-radius: 30px;
+    border-radius: 32px;
 
 }
