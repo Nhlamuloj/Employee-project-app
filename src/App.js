@@ -1,21 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
-import AddEmployee from './components/addemployee';
-import Display from './components/displayName'
-import { useState } from 'react';
 
-function App() {
+import './App.css';
+import { useState } from 'react';
+import Home from './components/Home';
+
+function App(props) {
+
+  const [Employee, setEmployee] = useState([])
+  
+    const removeEmployee =item =>{
+      setEmployee([
+        ...Employee.slice(0,item),
+        ...Employee.slice(item +1, Employee.length)
+      ])
+    }
+  
+
+  const addEmployee=((name, lastname,email)=>{
+    setEmployee((items)=>[...items, {
+      name:name,
+      lastname:lastname,
+      email:email,
+    }])
+    console.log(Employee)
+  })
+
 
 
   
-  return (
-   <div className='container'>
-    <AddEmployee/>
-    <Display />
-   </div>
-    
-
-  );
+  return(
+    <Home list={Employee} add={addEmployee} deleteEmployee ={removeEmployee} />
+  )
 }
 
 export default App;

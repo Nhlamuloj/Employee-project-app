@@ -8,14 +8,19 @@ input{
 }
 
 h1{
-    background-color: darkgrey;
+    background-color: gainsboro;
     width: 700px;
 }
 
 .btn{
-    background-color:greenyellow;
+    background-color:darkgreen;
     height: 30px;
     width: 300px;
     border-radius: 32px;
 
 }
+
+table, th, td {
+    border: 4px solid black;
+    border-collapse: collapse;
+  }
