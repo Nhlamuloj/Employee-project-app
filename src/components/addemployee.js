@@ -2,6 +2,8 @@
 import React, {useState} from 'react';
 import '../components/css/AddEmployee.css'
 
+import {addDoc, collection } from 'firebase/firestore';
+
 function AddEmployee(props){
 
     const[name,setName] = useState('')

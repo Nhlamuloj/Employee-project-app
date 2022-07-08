@@ -29,7 +29,7 @@ function Display(props){
                         <td>{item.email}</td>
 
                         <td>
-                            <button ><FaEdit/></button> 
+                            <button ><FaEdit/>Edit</button> 
                             <button ><BsFillTrashFill/>Delete</button>
                         </td>
                     </tr>

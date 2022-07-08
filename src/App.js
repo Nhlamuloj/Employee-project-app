@@ -2,7 +2,7 @@
 import './App.css';
 import { useState } from 'react';
 import Home from './components/Home';
-
+import { db } from 'firebase/firestore'
 function App(props) {
 
   const [Employee, setEmployee] = useState([])
