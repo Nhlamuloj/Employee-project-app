@@ -4,9 +4,7 @@ import Display from "./displayName";
 
 function Home(props){
 
-    const displayName =(props) =>{
-        const{displayName,deleteEmployee} =props;
-    }
+    
     return(
         <div className="container">
             <AddEmployee add={props.add} deleteEmployee/>

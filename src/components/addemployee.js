@@ -1,19 +1,26 @@
 
 import React, {useState} from 'react';
 import '../components/css/AddEmployee.css'
-
-import {addDoc, collection } from 'firebase/firestore';
-
 function AddEmployee(props){
 
     const[name,setName] = useState('')
     const[lastname, setLastname] =useState("");
     const[email, setEmail] =useState("");
 
-    let add=(()=>{
-        props.add(name, lastname,email)
-
-    })
+  const add =async (e)=>{
+    e.preventDefault();
+    
+    if(name ===""||lastname ===""||email ===""){
+        
+        return;
+    }
+    const newEmployee={
+      name,
+      lastname,
+      email,
+    }
+    console.log(newEmployee);
+  };
 
     return(
         <div className='container'>

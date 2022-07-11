@@ -2,6 +2,7 @@ import React from "react";
 import {FaEdit} from "react-icons/fa" 
 import { BsFillTrashFill} from "react-icons/bs";
 
+
 function Display(props){
     
     return(
