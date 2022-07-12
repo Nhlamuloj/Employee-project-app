@@ -1,38 +1,56 @@
+import React,{useState} from "react";
+import { db } from "../firebase-config";
+import { collection, addDoc } from "firebase/firestore";
 
-import React, {useState} from 'react';
-import '../components/css/AddEmployee.css'
-function AddEmployee(props){
-
-    const[name,setName] = useState('')
-    const[lastname, setLastname] =useState("");
-    const[email, setEmail] =useState("");
-
-  const add =async (e)=>{
+function AddEmployee() {
+  const [name, setName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [email, setEmail]= useState("")
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if(name ===""||lastname ===""||email ===""){
-        
-        return;
+    if (name !== ""||lastname !==""||email !=="") {
+      await addDoc(collection(db, "items"), {
+        name,
+        lastname,
+        email,
+        completed: false,
+      });
+      setName("");
+      setLastName("");
+      setEmail("")
     }
-    const newEmployee={
-      name,
-      lastname,
-      email,
-    }
-    console.log(newEmployee);
   };
-
-    return(
-        <div className='container'>
-            <div className='form'>
-            <h1>New Employee</h1>
-            <label>First name</label><input type="text" placeholder='Enter your first name' id="name" onChange={(e)=>setName(e.target.value)}/>
-            <label>Last name</label> <input type="text" placeholder='Enter your lastname' id="lastname" onChange={(e)=>setLastname(e.target.value)} />
-            <label>Email</label><input type="email" placeholder='Enter your email' id="email" onChange={(e)=>setEmail(e.target.value)}/><br></br>
-
-            <button className='btn' onClick={add} >Add Employee</button>
-            </div>
-        </div>
-    )
+  return (
+    
+    <form onSubmit={handleSubmit}>
+      
+      <div className="input_container">
+      <h1 className="title">Employee</h1>
+        <input  className="addOn"
+          type="text"
+          placeholder="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        /><br></br>
+        <input className="addOn"
+          type="text"
+          placeholder="lastname"
+          value={lastname}
+          onChange={(e) => setLastName(e.target.value)}
+        /><br></br>
+        <input  className="addOn"
+          type="text"
+          placeholder="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        /><br></br>
+          <button className="btnAdd">Add</button>
+      </div>
+      <div >
+      
+      </div>
+    </form>
+  );
 }
-export default AddEmployee;
+export default  AddEmployee()

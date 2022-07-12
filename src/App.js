@@ -1,35 +1,60 @@
 
-import './App.css';
-import { useState } from 'react';
-import Home from './components/Home';
+import "./App.css";
+import React ,{useState}from "react";
 
-function App(props) {
+import Home from "./components/home";
+import AddEmployee from "./components/AddEmployee";
+import  {useEffect} from 'react';
 
-  const [Employee, setEmployee] = useState([])
-  
-    const removeEmployee =item =>{
-      setEmployee([
-        ...Employee.slice(0,item),
-        ...Employee.slice(item +1, Employee.length)
-      ])
-    }
-  
+import {
+  collection,
+  query,
+  onSnapshot,
+  doc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
+import { db } from "./firebase-config";
 
-  const addEmployee=((name, lastname,email)=>{
-    setEmployee((items)=>[...items, {
-      name:name,
-      lastname:lastname,
-      email:email,
-    }])
-    console.log(Employee)
-  })
+function App() {
+  const [items, setitems] = useState([]);
 
+  useEffect(() => {
+    const q = query(collection(db, "items"));
+    const unsub = onSnapshot(q, (querySnapshot) => {
+      let addArray = [];
+      querySnapshot.forEach((doc) => {
+        addArray.push({ ...doc.data(), id: doc.id });
+      });
+      setitems(addArray);
+    });
+    return () => unsub();
+  }, []);
 
+  const handleEdit = async (items, name) => {
+    await updateDoc(doc(db, "items", items.id), { name: name });
+  };
 
-  
-  return(
-    <Home list={Employee} add={addEmployee} deleteEmployee ={removeEmployee} />
-  )
+  const handleDelete = async (id) => {
+    await deleteDoc(doc(db, "items", id));
+  };
+  return (
+    <div className="App">
+      <div>
+        <AddEmployee />
+      </div>
+      <div className="todo_container">
+        {items.map((items) => (
+          <Home
+            key={items.id}
+            todo={items}
+            
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }
-
 export default App;
