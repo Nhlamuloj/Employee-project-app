@@ -1,56 +1,21 @@
-import React,{useState} from "react";
-import { db } from "../firebase-config";
-import { collection, addDoc } from "firebase/firestore";
+import React, {useState} from "react";
 
-function AddEmployee() {
-  const [name, setName] = useState("");
-  const [lastname, setLastName] = useState("");
-  const [email, setEmail]= useState("")
-  
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (name !== ""||lastname !==""||email !=="") {
-      await addDoc(collection(db, "items"), {
-        name,
-        lastname,
-        email,
-        completed: false,
-      });
-      setName("");
-      setLastName("");
-      setEmail("")
-    }
-  };
-  return (
+function AddEmployee(){
+
     
-    <form onSubmit={handleSubmit}>
-      
-      <div className="input_container">
-      <h1 className="title">Employee</h1>
-        <input  className="addOn"
-          type="text"
-          placeholder="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        /><br></br>
-        <input className="addOn"
-          type="text"
-          placeholder="lastname"
-          value={lastname}
-          onChange={(e) => setLastName(e.target.value)}
-        /><br></br>
-        <input  className="addOn"
-          type="text"
-          placeholder="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        /><br></br>
-          <button className="btnAdd">Add</button>
-      </div>
-      <div >
-      
-      </div>
-    </form>
-  );
+
+    
+    return(
+        <div className="container">
+
+            <h1 style={{paddingLeft: "5px"}}>New Employee</h1>
+            <input type="text" placeholder="Enter your name and surname" onChange={(e)=>setSurname(e.target.value)}/><br></br>
+            <input type="text" placeholder="Enter your name and surname" onChange={(e)=>setName(e.target.value)}/><br></br>
+            <input type="email" placeholder="Enter your email" onChange={(e)=>setEmail(e.target.value)}/><br></br>
+
+            <button style={{width: "150px", height: "30px"}} >Add Employee</button>
+        </div>
+    )
 }
-export default  AddEmployee()
+
+export default AddEmployee;

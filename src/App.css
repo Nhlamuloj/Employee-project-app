@@ -1,25 +1,6 @@
-*{
-  margin: 0;
-  padding: 0;
+.App-header {
+  width: 50%;
+  margin-left: 50%;
+  margin-top: -14.5%;
 
-}
-
-body{
-  background-color: whitesmoke;
-  font-family: "lato";
-}
-
-.container{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  
-  height: 800px;
-}
-
-.form{
-  display: flex;
-  flex-direction: column;
-  height: 800px;
 }
