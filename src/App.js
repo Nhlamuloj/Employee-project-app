@@ -1,27 +1,45 @@
 import "antd/dist/antd.css";
 import './App.css';
-import {Button, Table, Modal, Input} from "antd"
+import { Table, Modal, Input} from "antd"
 import {useState} from 'react'
 import {EditOutlined, DeleteOutlined} from '@ant-design/icons'
 import AddEmployee from "./addEmployee";
 
 function App() {
 
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState("");
   const [editingEmployee, setEditingEmployee] = useState(null);
   const [dataSource, setdataSource] = useState([
     {
-     
-      name: 'Nhlamulo',
+    
+      id: 1,
+      name: 'nhlamulo',
       surname: 'Mahlabana',
-      email: 'Nmahlabana@gmail.com'
+      email: 'nmahlabana@email.com'
+    },
+    {
+      id: 2,
+      name: 'Tony',
+      surname: 'Baloyi',
+      email: 'Baloyi@email.com'
+    },
+    {
+      id: 3,
+      name: 'Remind',
+      surname: 'Mabaso',
+      email: 'rmabaso@email.com'
     },
   
-  
-  
+    {
+      id:4 ,
+      name: 'Elmon MadALA',
+      surname: 'Nyaka',
+      email: 'enyaka@email.com'
+    },
   ]);
   
   const columns = [
+   
     {
       title: 'Name',
       dataIndex: 'name',
@@ -57,7 +75,7 @@ function App() {
 
   const onDeleteStudent = (record) => {
     Modal.confirm({
-      title: "Are you sure you want top delete "+ record.name+"?",
+      title: "Are you sure you want to delete",
       okText: "Yes",
       okType: "danger",
       cancelText: "No",
@@ -70,17 +88,7 @@ function App() {
     
   };
 
-  const onAddEmployee = () => {
-    const randomNum = parseInt(Math.random()*100)
-    const newEmployee = {
-      name: "Name of "+randomNum,
-      address: "Address of "+ randomNum,
-      email: "Email of "+ randomNum,
-    }
-    setdataSource(pre=>{
-      return [...pre, newEmployee]
-    })
-  }
+  
 
 
   const onEditEmployee = (record) => {
@@ -92,10 +100,11 @@ function App() {
     setEditingEmployee(null)
   }
 
-  //A function to add employee
+  
 
-  const addEmployee=(( name, surname, email)=>{
+  const addEmployee=((id, name, surname, email)=>{
     setdataSource((items)=>[...items, {
+      id:id,
       name:name,
       surname:surname,
       email:email
@@ -107,7 +116,7 @@ function App() {
         <AddEmployee list={dataSource} add={addEmployee} />
       </div>
       <header className="App-header">
-        <Button onClick={onAddEmployee}>Enter a Random Employee</Button>
+       <h1>Employee list</h1>
       <Table dataSource={dataSource} columns={columns} />
       <Modal
         title="Edit Employee"
